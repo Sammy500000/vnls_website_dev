@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+
+  /* Typography Scale */
+  --text-hero: 4.5rem;
+  --text-hero--line-height: 1.1;
+  --text-hero--letter-spacing: -0.02em;
+  
+  --text-display-xl: 3.5rem;
+  --text-display-xl--line-height: 1.1;
+  --text-display-xl--letter-spacing: -0.02em;
+  
+  --text-display-l: 2.75rem;
+  --text-display-l--line-height: 1.2;
+  --text-display-l--letter-spacing: -0.01em;
+  
+  --text-h1: 2.25rem;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.01em;
+  
+  --text-h2: 1.875rem;
+  --text-h2--line-height: 1.3;
+  
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.4;
+  
+  --text-body-large: 1.125rem;
+  --text-body-large--line-height: 1.6;
+  
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.5;
+
+  /* Color System */
+  /* Primary */
+  --color-cream: #F8F3EC;
+  --color-warm-ivory: #F4EEE6;
+  --color-soft-beige: #E8DCCB;
+  /* Accent */
+  --color-soft-gold: #D6B16D;
+  --color-warm-gold: #C69C54;
+  /* Maternal */
+  --color-terracotta: #C27B61;
+  --color-rose-clay: #D5A28D;
+  /* Text */
+  --color-deep-brown: #2F241D;
+  --color-rich-cocoa: #4B3A2E;
+
+  /* Semantic Mappings */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-deep-brown);
+  --color-primary: var(--color-warm-ivory);
+  --color-primary-foreground: var(--color-deep-brown);
+  --color-secondary: var(--color-soft-beige);
+  --color-secondary-foreground: var(--color-deep-brown);
+  --color-accent: var(--color-soft-gold);
+  --color-accent-foreground: #FFFFFF;
+  --color-muted: #EAE6DF;
+  --color-muted-foreground: var(--color-rich-cocoa);
+  --color-border: rgba(47, 36, 29, 0.1);
+  --color-input: rgba(47, 36, 29, 0.1);
+
+  /* Glass Colors */
+  --color-glass-light: rgba(255, 255, 255, 0.15);
+  --color-glass-medium: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(47, 36, 29, 0.04);
+  --shadow-md: 0 8px 24px rgba(47, 36, 29, 0.06);
+  --shadow-lg: 0 16px 48px rgba(47, 36, 29, 0.08);
+  --shadow-hero: 0 32px 80px rgba(47, 36, 29, 0.12);
+
+  /* Animation Tokens */
+  --animate-duration-fast: 0.2s;
+  --animate-duration-medium: 0.4s;
+  --animate-duration-slow: 0.8s;
+  --animate-ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --animate-ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-ease-dramatic: cubic-bezier(0.85, 0, 0.15, 1);
+
+  /* Radii */
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+}
+
+@layer base {
+  :root {
+    --glass-blur: 24px;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  /* Glass Surface */
+  .glass-surface {
+    background: var(--color-glass-light);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .glass-surface-medium {
+    background: var(--color-glass-medium);
+    backdrop-filter: blur(calc(var(--glass-blur) / 2));
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) / 2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Hover Elevation */
+  .hover-elevation {
+    transition: transform var(--animate-duration-medium) var(--animate-ease-smooth),
+                box-shadow var(--animate-duration-medium) var(--animate-ease-smooth);
+  }
+  
+  .hover-elevation:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Text Balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Global Effects */
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  .warm-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, rgba(214, 177, 109, 0.08) 0%, transparent 60%);
+  }
+}
