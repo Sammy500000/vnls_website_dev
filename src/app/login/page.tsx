@@ -25,8 +25,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (data.success) {
-        router.push('/');
-        router.refresh();
+        window.location.href = '/';
       } else {
         setError('Invalid credentials');
       }
